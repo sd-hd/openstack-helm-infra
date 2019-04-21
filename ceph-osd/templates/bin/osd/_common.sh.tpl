@@ -156,7 +156,7 @@ function udev_settle {
   partprobe "${OSD_DEVICE}"
   if [ "x$JOURNAL_TYPE" == "xblock-logical" ]; then
     OSD_JOURNAL=$(readlink -f ${OSD_JOURNAL})
-    local JDEV=$(echo ${OSD_JOURNAL} | sed 's/[0-9]//g')
+    local JDEV=$(echo ${OSD_JOURNAL} | sed 's/p\?[0-9]\+$//g')
     partprobe "${JDEV}"
   fi
   # watch the udev event queue, and exit if all current events are handled

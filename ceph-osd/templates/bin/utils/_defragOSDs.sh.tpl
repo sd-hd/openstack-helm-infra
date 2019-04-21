@@ -33,7 +33,7 @@ fi
 
 if [ "x${ARG}" == "xdefrag" ] && [ "x${STORAGE_TYPE%-*}" == "xblock" ]; then
   OSD_DEVICE=$(readlink -f ${STORAGE_LOCATION})
-  ODEV=$(echo ${OSD_DEVICE} | sed 's/[0-9]//g' | cut -f 3 -d '/')
+  ODEV=$(echo ${OSD_DEVICE} | sed 's/p\?[0-9]\+$//g' | cut -f 3 -d '/')
   OSD_PATH=$(cat /proc/mounts | awk '/ceph-/{print $2}')
   OSD_STORE=$(cat ${OSD_PATH}/type)
   DATA_PART=$(cat /proc/mounts | awk '/ceph-/{print $1}')
